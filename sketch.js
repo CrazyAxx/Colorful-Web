@@ -1,11 +1,13 @@
 //amount of balls per array
-var N = 1000;
+var N = 100;
 
 //array names
 var B1;
 var B2;
 
 var MaxDist;
+
+var center;
 
 function setup() {
   createCanvas( windowWidth , windowHeight );
@@ -14,6 +16,8 @@ function setup() {
   //creating the arrays (array is a table of variables for a for-loop)
   B1 = new Array(N);
   B2 = new Array(N);
+  
+  center= createVector( width*0.5 , height*0.5 );
   
   //create for-loop for the arrays)
   for ( n = 0 ; n < N ; n++ ){
@@ -28,18 +32,19 @@ function setup() {
 }
 
 function draw() {
+//  background( 0 , 0 , 0 , 0.01 );
+  
   //for-loop to create the arrays
   for ( n = 0 ; n < N ; n++ ){
     B1[n].evolveDraw();
     B2[n].evolveDraw();
     
-    var Dist = B1[n].pos.dist(B2[n].pos);
-    //C1 = color( Dist / MaxDist * 100  , 100 , 100 , .02);
-    //C2 = color( 90 + Dist / MaxDist * 180  , 100 , 100 , .02);
-    //C3 = color( 230 + Dist / MaxDist * 150  , 100 , 100 , .02);
-    C4 = color( Dist/MaxDist * 360 , 100 , 100 , .01 );
+    var Dist = center.dist(B1[n].pos);
     
-    stroke( C4 );
+    
+    var C1 = color( Dist / MaxDist * 750 , 100 , 100 , 0.02);
+    
+    stroke( C1 );
     line( B1[n].pos.x , B1[n].pos.y , B2[n].pos.x , B2[n].pos.y );
   }
 }
@@ -53,7 +58,7 @@ var Ball = function(){
     //direction (randomized)
   this.v = p5.Vector.random2D();
     //speed
-  this.v.mult( random( 1 , 5 ) );
+  this.v.mult( random( 1 , 3 ) );
   
   //new function-anything told to evolveDraw will follow these instructions
   this.evolveDraw =function() {
