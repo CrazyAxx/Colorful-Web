@@ -11,13 +11,17 @@ var center;
 
 var ext;
 
+var area;
+
 function setup() {
   createCanvas( windowWidth , windowHeight );
   background( 0 , 0 , 0 );
   
   ext = width+height/2;
   
-  N = floor(ext/20);
+  area = width * height;
+  
+  N = floor( area / 12000 );
   
   console.log( N );
   
@@ -50,7 +54,7 @@ function draw() {
     var Dist = center.dist(B1[n].pos);
     
     
-    var C1 = color( Dist / MaxDist * 750 , 100 , 100 , 0.02);
+    var C1 = color( Dist / MaxDist * 750 % 360 , 100 , 100 , 0.02);
     
     stroke( C1 );
     line( B1[n].pos.x , B1[n].pos.y , B2[n].pos.x , B2[n].pos.y );
