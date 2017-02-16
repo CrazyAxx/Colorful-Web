@@ -1,5 +1,5 @@
 //amount of balls per array
-var N = 100;
+var N;
 
 //array names
 var B1;
@@ -9,9 +9,17 @@ var MaxDist;
 
 var center;
 
+var ext;
+
 function setup() {
   createCanvas( windowWidth , windowHeight );
   background( 0 , 0 , 0 );
+  
+  ext = width+height/2;
+  
+  N = floor(ext/20);
+  
+  console.log( N );
   
   //creating the arrays (array is a table of variables for a for-loop)
   B1 = new Array(N);
