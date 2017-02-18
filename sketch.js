@@ -90,7 +90,7 @@ var Ball = function(){
 };
 function keyTyped() {
  if( key === 's' ) {
-   saveCanvas( 'stole this from Collin' , 'jpg' );
+   saveCanvas( 'saved web' , 'jpg' );
    console.log("saved");
  }
 }
