@@ -3,94 +3,96 @@ var N;
 
 //array names
 var B1;
-var B2;
 
-var MaxDist;
-
-var center;
-
-var ext;
-
-var area;
 
 function setup() {
   createCanvas( windowWidth , windowHeight );
   background( 0 , 0 , 0 );
   
-  ext = width+height/2;
-  
-  area = width * height;
-  
-  N = floor( area / 12000 );
-  
-  console.log( N );
-  
-  //creating the arrays (array is a table of variables for a for-loop)
-  B1 = new Array(N);
-  B2 = new Array(N);
-  
-  center= createVector( width*0.5 , height*0.5 );
   
   //create for-loop for the arrays)
-  for ( n = 0 ; n < N ; n++ ){
-    B1[n] = new Ball();
-    B2[n] = new Ball();
-  }
-  
-  MaxDist= sqrt( width * width + height* height);
+  B1 = new Ball();
   
   colorMode(HSB);
   
 }
 
 function draw() {
-//  background( 0 , 0 , 0 , 0.01 );
-  
-  //for-loop to create the arrays
-  for ( n = 0 ; n < N ; n++ ){
-    B1[n].evolveDraw();
-    B2[n].evolveDraw();
-    
-    var Dist = center.dist(B1[n].pos);
-    
-    
-    var C1 = color( Dist / MaxDist * 750 % 360 , 100 , 100 , 0.02);
-    
-    stroke( C1 );
-    line( B1[n].pos.x , B1[n].pos.y , B2[n].pos.x , B2[n].pos.y );
-  }
+  B1.evolveDraw();
+  B1.draw2();
 }
 
-//new function-anything that is classified as ball will follow these instructions
 var Ball = function(){
-  //create vector for position of the bal
-  this.pos = createVector( random( 0 , width ) , random( 0 , height ) );
+    
+    var area = width * width;
+    
+     N = floor( area / 12000 );
+     console.log( N );
+  this.pos1 = new Array(N);
+  this.pos2 = new Array(N);
   
-  //create vector for velocity
-    //direction (randomized)
-  this.v = p5.Vector.random2D();
-    //speed
-  this.v.mult( random( 1 , 3 ) );
+  this.v1 = new Array(N);
+  this.v2 = new Array(N);
+  
+  for( n = 0 ; n < N ; n++ ){
+    this.pos1[n] = createVector( random( 0 , width ) , random( 0 , width));
+    this.pos2[n] = createVector( random( 0 , width) , random( 0 , width ));
+    this.v1[n] = p5.Vector.random2D();
+    this.v2[n] = p5.Vector.random2D();
+    this.v1[n].mult( random( 1 , 3 ) );
+    this.v2[n].mult( random( 1 , 3 ) );
+  
+  }
+  
   
   //new function-anything told to evolveDraw will follow these instructions
-  this.evolveDraw =function() {
-    //adds velocity to position
-    this.pos.add( this.v );
+  this.draw2 = function(){
+    for( n= 0 ; n < N ; n++ ){
+      
+      var center= createVector( width*0.5 , height*0.5 );
+      var dist1 = center.dist(this.pos1[n]);
+      
+      var MaxDist= sqrt( (width * width) + (height * height) );
+      
+      var C1 = color( dist1 / MaxDist * 750 % 360 , 100 , 100 , 0.02);
+      
+      stroke( C1 );
+      line( this.pos1[n].x , this.pos1[n].y , this.pos2[n].x , this.pos2[n].y );
+    }
+  };
   
-  //set boundries for balls)
-    if ( this.pos.x >= width || this.pos.x <= 0 ){
-      this.v.x *=-1;
-    }
-    if ( this.pos.y >= height || this.pos.y <= 0 ){
-      this.v.y *=-1;
-    }
+  //new function-anything told to evolveDraw will follow these instructions
     
+  this.evolveDraw = function(){
+    for( n= 0 ; n < N ; n++ ){
+      //adds velocity to position
+        this.pos1[n].add( this.v1[n] );
+        this.pos2[n].add( this.v2[n] );
+    
+    //set boundries for balls)
+        if ( this.pos1[n].x >= width || this.pos1[n].x <= 0 ){
+          this.v1[n].x *=-1;
+        }
+        if ( this.pos1[n].y >= width || this.pos1[n].y <= 0 ){
+          this.v1[n].y *=-1;
+        }
+        
+        if ( this.pos2[n].x >= width || this.pos2[n].x <= 0 ){
+          this.v2[n].x *=-1;
+        }
+        if ( this.pos2[n].y >= width || this.pos2[n].y <= 0 ){
+          this.v2[n].y *=-1;
+        }
+    }
   };
   
 };
 function keyTyped() {
  if( key === 's' ) {
-   saveCanvas( 'saved web' , 'jpg' );
+   saveCanvas( 'Web' , 'jpg' );
    console.log("saved");
+ }
+ if( key === 'n' ){
+   background( 0 , 0 , 0 );
  }
 }
