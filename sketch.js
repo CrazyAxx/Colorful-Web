@@ -35,8 +35,8 @@ var Ball = function(){
   this.v2 = new Array(N);
   
   for( n = 0 ; n < N ; n++ ){
-    this.pos1[n] = createVector( random( 0 , width ) , random( 0 , width));
-    this.pos2[n] = createVector( random( 0 , width) , random( 0 , width ));
+    this.pos1[n] = createVector( random( 0 , width ) , random( 0 , height));
+    this.pos2[n] = createVector( random( 0 , width) , random( 0 , height));
     this.v1[n] = p5.Vector.random2D();
     this.v2[n] = p5.Vector.random2D();
     this.v1[n].mult( random( 1 , 3 ) );
@@ -54,8 +54,8 @@ var Ball = function(){
       
       var MaxDist= sqrt( (width * width) + (height * height) );
       
-      //var C1 = color( dist1 / MaxDist * 750 % 360 , 100 , 100 , 0.02);
-      var C1 =color( 290 , 100 , 100 , .02 )
+      var C1 = color( dist1 / MaxDist * 750 % 360 , 100 , 100 , 0.02);
+      //var C1 =color( 290 , 100 , 100 , .02 )
       
       stroke( C1 );
       line( this.pos1[n].x , this.pos1[n].y , this.pos2[n].x , this.pos2[n].y );
