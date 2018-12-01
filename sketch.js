@@ -90,7 +90,7 @@ var Ball = function(){
 };
 function keyTyped() {
  if( key === 's' ) {
-   saveCanvas( 'Web' , 'jpg' );
+   saveCanvas( 'Web' , 'png' );
    console.log("saved");
  }
  if( key === 'n' ){
