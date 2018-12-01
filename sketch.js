@@ -54,7 +54,7 @@ var Ball = function(){
       
       var MaxDist= sqrt( (width * width) + (height * height) );
       
-      var C1 = color( dist1 / MaxDist * 750 % 360 , 100 , 100 , 0.005);
+      var C1 = color( dist1 / MaxDist * 750 % 360 , 100 , 100 , 0.01);
       //var C1 =color( 290 , 100 , 100 , .02 )
       
       stroke( C1 );
